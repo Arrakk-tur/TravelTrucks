@@ -1,0 +1,92 @@
+.home,
+.home * {
+  box-sizing: border-box;
+}
+.home {
+  background: var(--white, #ffffff);
+  height: 768px;
+  position: relative;
+  overflow: hidden;
+}
+.home .container {
+  display: flex;
+  flex-direction: column;
+  gap: 80px;
+  align-items: center;
+  justify-content: flex-start;
+  width: 1440px;
+  position: absolute;
+  left: 0px;
+  top: 72px;
+}
+.home .hero-image {
+  display: flex;
+  flex-direction: column;
+  gap: 52px;
+  align-items: center;
+  justify-content: flex-start;
+  align-self: stretch;
+  flex-shrink: 0;
+  position: relative;
+  transform-origin: 0 0;
+  transform: rotate(0deg) scale(-1, 1);
+}
+.home .picture {
+  background: linear-gradient(to left, rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.2));
+  flex-shrink: 0;
+  width: 1440px;
+  height: 696px;
+  position: relative;
+  object-fit: cover;
+}
+.home .title {
+  display: flex;
+  flex-direction: column;
+  gap: 40px;
+  align-items: flex-start;
+  justify-content: flex-start;
+  flex-shrink: 0;
+  position: absolute;
+  left: 1376px;
+  top: 260px;
+  transform-origin: 0 0;
+  transform: rotate(0deg) scale(-1, 1);
+}
+.home .text {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  align-items: flex-start;
+  justify-content: flex-start;
+  align-self: stretch;
+  flex-shrink: 0;
+  position: relative;
+}
+.home .text2 {
+  color: var(--inputs, #f7f7f7);
+  text-align: left;
+  font-family: var(--h1-font-family, "Inter-SemiBold", sans-serif);
+  font-size: var(--h1-font-size, 48px);
+  line-height: var(--h1-line-height, 32px);
+  font-weight: var(--h1-font-weight, 600);
+  position: relative;
+}
+.home .text3 {
+  color: var(--inputs, #f7f7f7);
+  text-align: left;
+  font-family: var(--h2-font-family, "Inter-SemiBold", sans-serif);
+  font-size: var(--h2-font-size, 24px);
+  line-height: var(--h2-line-height, 32px);
+  font-weight: var(--h2-font-weight, 600);
+  position: relative;
+}
+.home .button-instance {
+  flex-shrink: 0 !important;
+  width: 173px !important;
+}
+.home .header-default-instance {
+  width: 1440px !important;
+  position: absolute !important;
+  left: 0px !important;
+  top: 0px !important;
+}
