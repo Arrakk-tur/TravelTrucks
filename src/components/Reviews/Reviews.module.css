@@ -1,0 +1,46 @@
+.reviewsContainer {
+  padding: 20px;
+}
+
+.reviewCard {
+  border: 1px solid var(--gray-light);
+  border-radius: 5px;
+  padding: 15px;
+  margin-bottom: 15px;
+}
+
+.reviewHeader {
+  display: flex;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+.avatar {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background-color: var(--badges);
+  color: var(--main);
+  font-weight: 600;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-right: 10px;
+}
+
+.reviewInfo {
+  display: flex;
+  flex-direction: column;
+}
+
+.authorName {
+  font-weight: 500;
+  color: var(--main);
+  margin: 0;
+}
+
+.reviewText {
+  color: var(--text);
+  font-size: 0.9rem;
+  line-height: 1.4;
+}

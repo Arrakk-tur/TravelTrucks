@@ -1,5 +1,5 @@
 .card {
-  border: 1px solid #ddd;
+  border: 1px solid var(--gray-light);
   padding: 10px;
   margin-bottom: 10px;
   border-radius: 5px;
@@ -24,39 +24,43 @@
 
 .price {
   font-weight: bold;
-  color: #e44848;
+  color: var(--button);
 }
 
 .description {
   font-size: 0.9em;
-  color: #666;
+  color: var(--text);
 }
 
 .features {
   display: flex;
   gap: 5px;
   margin-top: 10px;
+  flex-wrap: wrap;
 }
 
 .feature {
-  background-color: #f2f4f7;
+  background-color: var(--badges);
   padding: 5px 10px;
   border-radius: 15px;
   font-size: 0.8em;
-  color: #333;
+  color: var(--main);
+  display: flex;
+  align-items: center;
+  gap: 4px; /* Spacing between icon and text */
 }
 
 .location {
   display: flex;
   align-items: center;
   margin-bottom: 5px;
-  color: #777;
+  color: var(--gray);
 }
 
-.mapIcon {
+.icon {
   width: 16px;
   height: 16px;
-  margin-right: 5px;
+  fill: var(--main); /* Adjust the fill color as needed */
 }
 
 .priceAndFavorite {

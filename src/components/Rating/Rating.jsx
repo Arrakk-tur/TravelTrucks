@@ -1,15 +1,18 @@
 import React from "react";
 import styles from "./Rating.module.css";
-import { ReactComponent as StarIcon } from "../../../public/assets/star-pressed0.svg";
 
 const Rating = ({ rating, reviewCount }) => {
   const stars = [];
   for (let i = 0; i < 5; i++) {
     stars.push(
-      <StarIcon
+      <svg
         key={i}
-        className={i < rating ? styles.starFilled : styles.starEmpty}
-      />
+        className={`${styles.star} ${
+          i < rating ? styles.starFilled : styles.starEmpty
+        }`}
+      >
+        <use href="/assets/icons.svg#icon-rating" />
+      </svg>
     );
   }
 

@@ -5,12 +5,6 @@ import styles from "./CamperCard.module.css";
 import Rating from "../../Rating/Rating";
 import FavoriteButton from "../../FavoriteButton/FavoriteButton";
 import Button from "../../Button/Button";
-import { ReactComponent as MapIcon } from "../../../../public/assets/map0.svg";
-import { ReactComponent as DiagramIcon } from "../../../../public/assets/diagram0.svg";
-import { ReactComponent as FuelPumpIcon } from "../../../../public/assets/fuel-pump0.svg";
-import { ReactComponent as CupHotIcon } from "../../../../public/assets/cup-hot0.svg";
-import { ReactComponent as WindIcon } from "../../../../public/assets/wind0.svg";
-
 const CamperCard = ({ camper }) => {
   const dispatch = useDispatch();
   const favorites = useSelector((state) => state.campers.favorites);
@@ -37,7 +31,10 @@ const CamperCard = ({ camper }) => {
           />
         </div>
         <div className={styles.location}>
-          <MapIcon className={styles.mapIcon} />
+          <svg className={styles.icon}>
+            <use href="/assets/icons.svg#map" />{" "}
+            {/* Replace 'map' with the actual ID in your sprite */}
+          </svg>
           {camper.location}
         </div>
         <Rating rating={camper.rating} reviewCount={camper.reviewCount} />
@@ -45,22 +42,38 @@ const CamperCard = ({ camper }) => {
         <div className={styles.features}>
           {camper.transmission === "automatic" && (
             <div className={styles.feature}>
-              <DiagramIcon className={styles.featureIcon} /> Automatic
+              <svg className={styles.icon}>
+                <use href="/assets/icons.svg#diagram" />{" "}
+                {/* Replace 'diagram' with the correct ID */}
+              </svg>
+              Automatic
             </div>
           )}
           {camper.fuel === "petrol" && (
             <div className={styles.feature}>
-              <FuelPumpIcon className={styles.featureIcon} /> Petrol
+              <svg className={styles.icon}>
+                <use href="/assets/icons.svg#fuel-pump" />{" "}
+                {/* Replace 'fuel-pump' with the correct ID */}
+              </svg>
+              Petrol
             </div>
           )}
           {camper.kitchen && (
             <div className={styles.feature}>
-              <CupHotIcon className={styles.featureIcon} /> Kitchen
+              <svg className={styles.icon}>
+                <use href="/assets/icons.svg#cup-hot" />{" "}
+                {/* Replace 'cup-hot' with the correct ID */}
+              </svg>
+              Kitchen
             </div>
           )}
           {camper.ac && (
             <div className={styles.feature}>
-              <WindIcon className={styles.featureIcon} /> AC
+              <svg className={styles.icon}>
+                <use href="/assets/icons.svg#wind" />{" "}
+                {/* Replace 'wind' with the correct ID */}
+              </svg>
+              AC
             </div>
           )}
         </div>

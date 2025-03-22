@@ -2,19 +2,18 @@
   display: flex;
   align-items: center;
   font-size: 0.9em;
-  color: #333;
+  color: var(--text);
+}
+
+.star {
+  width: 16px;
+  height: 16px;
+  margin-right: 2px; /* Adjust spacing between stars */
+  fill: var(--gray-light); /* Default color for empty stars */
 }
 
 .starFilled {
-  fill: #ffc531; /* Figma: --rating */
-  width: 16px;
-  height: 16px;
-}
-
-.starEmpty {
-  fill: #ddd;
-  width: 16px;
-  height: 16px;
+  fill: var(--rating); /* Figma: --rating */
 }
 
 .rating span {

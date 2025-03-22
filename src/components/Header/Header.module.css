@@ -1,0 +1,49 @@
+.header {
+  background-color: var(--white);
+  padding: 1rem 2rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px solid var(--gray-light);
+}
+
+.logo {
+  font-size: 1.5rem; /* Adjust size as needed */
+  font-weight: 600; /* Semi-Bold */
+  color: var(--main); /* Dark text color */
+  text-decoration: none;
+}
+
+.nav {
+  flex-grow: 1; /* Take up available space */
+  display: flex;
+  justify-content: center; /* Align to the right */
+  align-items: center; /* Center nav items vertically */
+}
+
+.navList {
+  list-style: none;
+  display: flex;
+  gap: 1.5rem; /* Adjust spacing between links */
+  margin: 0;
+  padding: 0;
+}
+
+.navLink {
+  text-decoration: none;
+  color: var(--text); /* Default gray text color */
+  font-weight: 400; /* Regular font weight */
+  transition: color 0.2s; /* Smooth color transition */
+  padding: 0.5rem 0.75rem; /* Adjust padding for visual appeal */
+}
+
+.navLink:hover {
+  color: var(--main);
+}
+
+.activeLink {
+  text-decoration: none;
+  color: var(--button); /* Use the button color for active link */
+  font-weight: 400; /* Make it bolder */
+  padding: 0.5rem 0.75rem; /* Match the navLink padding */
+}

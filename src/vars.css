@@ -11,40 +11,6 @@
   --button-hover: #d84343;
   --rating: #ffc531;
 
-  /* Fonts */
-  --h1-font-family: Inter-SemiBold, sans-serif;
-  --h1-font-size: 48px;
-  --h1-line-height: 32px;
-  --h1-font-weight: 600;
-  --h1-font-style: normal;
-  --h2-font-family: Inter-SemiBold, sans-serif;
-  --h2-font-size: 24px;
-  --h2-line-height: 32px;
-  --h2-font-weight: 600;
-  --h2-font-style: normal;
-  --h3-font-family: Inter-SemiBold, sans-serif;
-  --h3-font-size: 20px;
-  --h3-line-height: 24px;
-  --h3-font-weight: 600;
-  --h3-font-style: normal;
-  --body-font-family: Inter-Regular, sans-serif;
-  --body-font-size: 16px;
-  --body-line-height: 24px;
-  --body-font-weight: 400;
-  --body-font-style: normal;
-  --body-2-font-family: Inter-Medium, sans-serif;
-  --body-2-font-size: 16px;
-  --body-2-line-height: 24px;
-  --body-2-font-weight: 500;
-  --body-2-font-style: normal;
-  --button-font-family: Inter-Medium, sans-serif;
-  --button-font-size: 16px;
-  --button-line-height: 24px;
-  --button-font-weight: 500;
-  --button-font-style: normal;
-  --body-underline-font-family: Inter-Regular, sans-serif;
-  --body-underline-font-size: 16px;
-  --body-underline-line-height: 24px;
-  --body-underline-font-weight: 400;
-  --body-underline-font-style: normal;
+  /* Fonts - Removed individual styles for brevity, use font-family and font-size directly */
+  --base-font-family: Inter-Regular, sans-serif;
 }
