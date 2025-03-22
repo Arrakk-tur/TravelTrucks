@@ -1,7 +1,5 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
-import axios from "axios";
-
-const API_URL = "https://66b1f8e71ca8ad33d4f5f63e.mockapi.io/campers";
+import * as api from "../api/api"; // Import API functions
 
 const initialState = {
   campers: [],
@@ -10,35 +8,36 @@ const initialState = {
     location: "",
     vehicleType: "",
     vehicleEquipment: [],
+    page: 1, // Add page to filters for unified approach
+    limit: 4, // Add limit to filters
   },
   loading: false,
   error: null,
-  page: 1, // For loading more campers
-  hasMore: true, // Check if there are more campers to load
+  hasMore: true,
 };
 
+// Async Thunk for fetching campers
 export const fetchCampers = createAsyncThunk(
   "campers/fetchCampers",
-  async (filters = {}, { getState, dispatch }) => {
-    const { page } = getState().campers;
-    // Build query string based on filters and pagination
-    let queryString = `?page=${page}&limit=4`; // Adjust limit as needed
-
-    if (filters.location) {
-      queryString += `&location=${filters.location}`;
-    }
-    if (filters.vehicleType) {
-      queryString += `&vehicleType=${filters.vehicleType}`;
-    }
-    if (filters.vehicleEquipment && filters.vehicleEquipment.length > 0) {
-      filters.vehicleEquipment.forEach((equipment) => {
-        queryString += `&vehicleEquipment[]=${equipment}`;
-      });
-    }
-
+  async (_, { getState }) => {
+    // No direct filter argument
+    const { filters } = getState().campers;
     try {
-      const response = await axios.get(`${API_URL}${queryString}`);
-      return response.data;
+      const response = await api.fetchCampers(filters);
+      return response;
+    } catch (error) {
+      throw error;
+    }
+  }
+);
+
+// Async Thunk for fetching a single camper by ID
+export const fetchCamperById = createAsyncThunk(
+  "campers/fetchCamperById",
+  async (id) => {
+    try {
+      const response = await api.fetchCamperById(id);
+      return response;
     } catch (error) {
       throw error;
     }
@@ -50,9 +49,9 @@ const campersSlice = createSlice({
   initialState,
   reducers: {
     setFilters: (state, action) => {
-      state.filters = { ...state.filters, ...action.payload };
-      state.page = 1; // Reset to the first page when filters change
-      state.hasMore = true; // Reset hasMore as well
+      // Reset page to 1 when filters change, also preserve the limit
+      state.filters = { ...state.filters, ...action.payload, page: 1 };
+      state.hasMore = true;
     },
     toggleFavorite: (state, action) => {
       const camperId = action.payload;
@@ -68,11 +67,13 @@ const campersSlice = createSlice({
     },
     clearCampers: (state) => {
       state.campers = [];
-      state.page = 1;
       state.hasMore = true;
     },
     incrementPage: (state) => {
-      state.page += 1;
+      state.filters.page += 1; // Increment page within filters
+    },
+    setCampers: (state, action) => {
+      state.campers = action.payload;
     },
   },
   extraReducers: (builder) => {
@@ -83,21 +84,38 @@ const campersSlice = createSlice({
       })
       .addCase(fetchCampers.fulfilled, (state, action) => {
         state.loading = false;
-        // If it's the first page, replace the campers. Otherwise, append.
+        // Conditionally update the campers array
         state.campers =
-          state.page === 1
+          state.filters.page === 1
             ? action.payload
             : [...state.campers, ...action.payload];
-        // Check if there are more campers to load.  Adjust the check based on your API response.
-        state.hasMore = action.payload.length > 0;
+        state.hasMore = action.payload.length === state.filters.limit;
       })
       .addCase(fetchCampers.rejected, (state, action) => {
+        state.loading = false;
+        state.error = action.error.message;
+        state.hasMore = false;
+      })
+      .addCase(fetchCamperById.pending, (state) => {
+        state.loading = true;
+        state.error = null;
+      })
+      .addCase(fetchCamperById.fulfilled, (state, action) => {
+        state.loading = false;
+        state.camper = action.payload; // Store single camper data
+      })
+      .addCase(fetchCamperById.rejected, (state, action) => {
         state.loading = false;
         state.error = action.error.message;
       });
   },
 });
 
-export const { setFilters, toggleFavorite, clearCampers, incrementPage } =
-  campersSlice.actions;
+export const {
+  setFilters,
+  toggleFavorite,
+  clearCampers,
+  incrementPage,
+  setCampers,
+} = campersSlice.actions;
 export default campersSlice.reducer;

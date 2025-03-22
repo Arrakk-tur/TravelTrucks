@@ -1,4 +1,5 @@
 import React from "react";
+import "modern-normalize";
 import { Routes, Route } from "react-router-dom";
 import HomePage from "./pages/HomePage";
 import CatalogPage from "./pages/CatalogPage";

@@ -1,0 +1,22 @@
+.details {
+  padding: 20px;
+  font-family: sans-serif;
+}
+
+.form {
+  border: 1px solid var(--gray-light);
+  border-radius: 5px;
+  padding: 20px;
+  margin-bottom: 20px;
+}
+
+.comment {
+  width: 100%;
+  padding: 8px;
+  border: 1px solid var(--gray-light);
+  border-radius: 4px;
+  font-size: 1em;
+  box-sizing: border-box;
+  height: 100px; /* Adjust as needed */
+  resize: vertical; /* Allow vertical resizing */
+}

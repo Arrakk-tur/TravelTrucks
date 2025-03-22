@@ -4,25 +4,30 @@ import {
   fetchCampers,
   clearCampers,
   incrementPage,
+  setFilters,
 } from "../redux/campersSlice";
 import Catalog from "../components/Catalog/Catalog";
 
 const CatalogPage = () => {
   const dispatch = useDispatch();
-  const { campers, filters, loading, error, hasMore } = useSelector(
+  const { campers, loading, error, hasMore, filters } = useSelector(
     (state) => state.campers
   );
 
   useEffect(() => {
     dispatch(clearCampers()); // Clear previous results
-    dispatch(fetchCampers(filters)); // Fetch initial set of campers
-  }, [dispatch, filters]);
+    dispatch(fetchCampers()); // Fetch initial set of campers (no direct filter argument)
+  }, [dispatch, filters]); // Depend on filters to re-fetch
 
   const handleLoadMore = () => {
     if (hasMore) {
       dispatch(incrementPage());
-      dispatch(fetchCampers(filters));
+      dispatch(fetchCampers());
     }
+  };
+
+  const handleFilterChange = (newFilters) => {
+    dispatch(setFilters(newFilters)); // Dispatch new filters
   };
 
   return (
@@ -32,6 +37,7 @@ const CatalogPage = () => {
       error={error}
       hasMore={hasMore}
       onLoadMore={handleLoadMore}
+      onFilterChange={handleFilterChange} // Pass down the filter change handler
     />
   );
 };

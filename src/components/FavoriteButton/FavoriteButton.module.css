@@ -1,0 +1,14 @@
+.favoriteButton {
+  background-color: transparent;
+  border: 1px solid #e44848;
+  color: #e44848;
+  padding: 5px 10px;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 0.8em;
+}
+
+.favoriteButton.active {
+  background-color: #e44848;
+  color: white;
+}

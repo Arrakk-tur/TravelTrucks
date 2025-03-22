@@ -1,0 +1,23 @@
+.filters {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-bottom: 20px;
+  padding: 10px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+}
+
+.filters > div {
+  margin-bottom: 10px;
+}
+
+.filters h3 {
+  margin-bottom: 5px;
+  font-size: 1em;
+}
+
+.filters label {
+  display: block;
+  margin-bottom: 3px;
+}
