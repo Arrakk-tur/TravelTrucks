@@ -3,16 +3,14 @@ import { useParams, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchCamperById } from "../redux/campersSlice";
 import Details from "../components/Details/Details";
-import Reviews from "../components/Reviews/Reviews";
-import * as api from "../api/api"; // Import API functions
 import NotFoundPage from "../components/NotFoundPage/NotFoundPage";
+import * as api from "../api/api"; // Import API functions
 
 const DetailsPage = () => {
   const { id } = useParams();
   const dispatch = useDispatch();
-  const navigate = useNavigate(); // Used for redirection
+  const navigate = useNavigate();
   const { camper, loading, error } = useSelector((state) => state.campers);
-  const [reviews, setReviews] = useState([]);
   const [notFound, setNotFound] = useState(false);
 
   useEffect(() => {
@@ -27,21 +25,6 @@ const DetailsPage = () => {
       });
   }, [dispatch, id]);
 
-  useEffect(() => {
-    const fetchReviews = async () => {
-      try {
-        const response = await api.fetchReviews(id);
-        setReviews(response);
-      } catch (error) {
-        console.error("Error fetching reviews:", error);
-      }
-    };
-
-    if (camper) {
-      fetchReviews();
-    }
-  }, [camper, id]);
-
   if (notFound) {
     return <NotFoundPage />;
   }
@@ -55,15 +38,10 @@ const DetailsPage = () => {
   }
 
   if (!camper) {
-    return <div>Camper not found</div>; // Fallback in case something went wrong.
+    return <div>Camper not found</div>;
   }
 
-  return (
-    <div>
-      <Details camper={camper} />
-      <Reviews reviews={reviews} />
-    </div>
-  );
+  return <Details camper={camper} />;
 };
 
 export default DetailsPage;

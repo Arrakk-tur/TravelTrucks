@@ -10,21 +10,14 @@ const Filters = ({ onFilterChange }) => {
     onFilterChange({ location: e.target.value });
   };
 
-  const handleVehicleTypeChange = (e) => {
-    onFilterChange({ vehicleType: e.target.value });
+  const handleFormChange = (e) => {
+    onFilterChange({ form: e.target.value });
   };
 
   const handleEquipmentChange = (e) => {
-    const equipment = e.target.value;
-    let updatedEquipment = [...filters.vehicleEquipment];
-
-    if (e.target.checked) {
-      updatedEquipment.push(equipment);
-    } else {
-      updatedEquipment = updatedEquipment.filter((item) => item !== equipment);
-    }
-
-    onFilterChange({ vehicleEquipment: updatedEquipment });
+    const equipment = e.target.name;
+    const checked = e.target.checked;
+    onFilterChange({ [equipment]: checked });
   };
 
   return (
@@ -37,36 +30,36 @@ const Filters = ({ onFilterChange }) => {
       />
 
       <div>
-        <h3>Vehicle Type</h3>
+        <h3>Vehicle Form</h3>
         <label>
           <input
             type="radio"
-            name="vehicleType"
-            value="van"
-            checked={filters.vehicleType === "van"}
-            onChange={handleVehicleTypeChange}
+            name="form"
+            value="alcove"
+            checked={filters.form === "alcove"}
+            onChange={handleFormChange}
           />
-          Van
+          Alcove
         </label>
         <label>
           <input
             type="radio"
-            name="vehicleType"
+            name="form"
             value="fullyIntegrated"
-            checked={filters.vehicleType === "fullyIntegrated"}
-            onChange={handleVehicleTypeChange}
+            checked={filters.form === "fullyIntegrated"}
+            onChange={handleFormChange}
           />
           Fully Integrated
         </label>
         <label>
           <input
             type="radio"
-            name="vehicleType"
-            value="alcove"
-            checked={filters.vehicleType === "alcove"}
-            onChange={handleVehicleTypeChange}
+            name="form"
+            value="panelTruck"
+            checked={filters.form === "panelTruck"}
+            onChange={handleFormChange}
           />
-          Alcove
+          Van
         </label>
       </div>
 
@@ -75,8 +68,8 @@ const Filters = ({ onFilterChange }) => {
         <label>
           <input
             type="checkbox"
-            value="AC"
-            checked={filters.vehicleEquipment.includes("AC")}
+            name="AC"
+            checked={filters.AC}
             onChange={handleEquipmentChange}
           />
           AC
@@ -84,17 +77,17 @@ const Filters = ({ onFilterChange }) => {
         <label>
           <input
             type="checkbox"
-            value="Automatic"
-            checked={filters.vehicleEquipment.includes("Automatic")}
+            name="bathroom"
+            checked={filters.bathroom}
             onChange={handleEquipmentChange}
           />
-          Automatic
+          Bathroom
         </label>
         <label>
           <input
             type="checkbox"
-            value="Kitchen"
-            checked={filters.vehicleEquipment.includes("Kitchen")}
+            name="kitchen"
+            checked={filters.kitchen}
             onChange={handleEquipmentChange}
           />
           Kitchen
@@ -102,8 +95,8 @@ const Filters = ({ onFilterChange }) => {
         <label>
           <input
             type="checkbox"
-            value="TV"
-            checked={filters.vehicleEquipment.includes("TV")}
+            name="TV"
+            checked={filters.TV}
             onChange={handleEquipmentChange}
           />
           TV
@@ -111,11 +104,47 @@ const Filters = ({ onFilterChange }) => {
         <label>
           <input
             type="checkbox"
-            value="Bathroom"
-            checked={filters.vehicleEquipment.includes("Bathroom")}
+            name="radio"
+            checked={filters.radio}
             onChange={handleEquipmentChange}
           />
-          Bathroom
+          Radio
+        </label>
+        <label>
+          <input
+            type="checkbox"
+            name="refrigerator"
+            checked={filters.refrigerator}
+            onChange={handleEquipmentChange}
+          />
+          Refrigerator
+        </label>
+        <label>
+          <input
+            type="checkbox"
+            name="microwave"
+            checked={filters.microwave}
+            onChange={handleEquipmentChange}
+          />
+          Microwave
+        </label>
+        <label>
+          <input
+            type="checkbox"
+            name="gas"
+            checked={filters.gas}
+            onChange={handleEquipmentChange}
+          />
+          Gas
+        </label>
+        <label>
+          <input
+            type="checkbox"
+            name="water"
+            checked={filters.water}
+            onChange={handleEquipmentChange}
+          />
+          Water
         </label>
       </div>
     </div>

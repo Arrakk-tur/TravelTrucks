@@ -5,6 +5,7 @@ import styles from "./CamperCard.module.css";
 import Rating from "../../Rating/Rating";
 import FavoriteButton from "../../FavoriteButton/FavoriteButton";
 import Button from "../../Button/Button";
+
 const CamperCard = ({ camper }) => {
   const dispatch = useDispatch();
   const favorites = useSelector((state) => state.campers.favorites);
@@ -20,7 +21,11 @@ const CamperCard = ({ camper }) => {
 
   return (
     <div className={styles.card}>
-      <img src={camper.image} alt={camper.name} className={styles.image} />
+      <img
+        src={camper.gallery[0].thumb}
+        alt={camper.name}
+        className={styles.image}
+      />
       <div className={styles.details}>
         <h2 className={styles.name}>{camper.name}</h2>
         <div className={styles.priceAndFavorite}>
@@ -31,51 +36,26 @@ const CamperCard = ({ camper }) => {
           />
         </div>
         <div className={styles.location}>
+          {/* <svg className={styles.mapIcon}> */}
           <svg className={styles.icon}>
-            <use href="/assets/icons.svg#map" />{" "}
+            {/* <use href="/assets/icons.svg#map" /> */}
+            <use href="/src/assets/icons.svg#map" />
             {/* Replace 'map' with the actual ID in your sprite */}
           </svg>
           {camper.location}
         </div>
-        <Rating rating={camper.rating} reviewCount={camper.reviewCount} />
+        <Rating rating={camper.rating} reviewCount={camper.reviews.length} />
         <p className={styles.description}>{camper.description}</p>
         <div className={styles.features}>
           {camper.transmission === "automatic" && (
-            <div className={styles.feature}>
-              <svg className={styles.icon}>
-                <use href="/assets/icons.svg#diagram" />{" "}
-                {/* Replace 'diagram' with the correct ID */}
-              </svg>
-              Automatic
-            </div>
+            <div className={styles.feature}>Automatic</div>
           )}
-          {camper.fuel === "petrol" && (
-            <div className={styles.feature}>
-              <svg className={styles.icon}>
-                <use href="/assets/icons.svg#fuel-pump" />{" "}
-                {/* Replace 'fuel-pump' with the correct ID */}
-              </svg>
-              Petrol
-            </div>
+          {camper.engine === "diesel" && (
+            <div className={styles.feature}>Diesel</div>
           )}
-          {camper.kitchen && (
-            <div className={styles.feature}>
-              <svg className={styles.icon}>
-                <use href="/assets/icons.svg#cup-hot" />{" "}
-                {/* Replace 'cup-hot' with the correct ID */}
-              </svg>
-              Kitchen
-            </div>
-          )}
-          {camper.ac && (
-            <div className={styles.feature}>
-              <svg className={styles.icon}>
-                <use href="/assets/icons.svg#wind" />{" "}
-                {/* Replace 'wind' with the correct ID */}
-              </svg>
-              AC
-            </div>
-          )}
+          {camper.AC && <div className={styles.feature}>AC</div>}
+          {camper.bathroom && <div className={styles.feature}>Bathroom</div>}
+          {camper.kitchen && <div className={styles.feature}>Kitchen</div>}
         </div>
         <Button text="Show more" onClick={handleShowMoreClick} />
       </div>

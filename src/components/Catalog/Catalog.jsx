@@ -3,8 +3,8 @@ import styles from "./Catalog.module.css";
 import CamperCard from "./CamperCard/CamperCard";
 import Filters from "../Filters/Filters";
 import Loader from "../Loader/Loader";
-// import Header from "../Header/Header";
-import Button from "../Button/Button"; // Create Button Component
+import Button from "../Button/Button";
+
 const Catalog = ({
   campers,
   loading,
@@ -15,7 +15,6 @@ const Catalog = ({
 }) => {
   return (
     <div className={styles.catalog}>
-      {/* <Header className={styles["header-default-instance"]} /> */}
       <Filters onFilterChange={onFilterChange} />
 
       <div className={styles.camperList}>

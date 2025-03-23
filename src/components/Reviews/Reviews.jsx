@@ -1,6 +1,6 @@
 import React from "react";
 import styles from "./Reviews.module.css";
-import Rating from "../Rating/Rating";
+import Rating from "../Rating/Rating"; // Import the Rating component
 
 const Reviews = ({ reviews }) => {
   if (!reviews || reviews.length === 0) {
@@ -9,17 +9,19 @@ const Reviews = ({ reviews }) => {
 
   return (
     <div className={styles.reviewsContainer}>
-      {reviews.map((review) => (
-        <div key={review.id} className={styles.reviewCard}>
+      {reviews.map((review, index) => (
+        <div key={index} className={styles.reviewCard}>
           <div className={styles.reviewHeader}>
-            <div className={styles.avatar}>{review.author.charAt(0)}</div>
+            <div className={styles.avatar}>
+              {review.reviewer_name.charAt(0)}
+            </div>
             <div className={styles.reviewInfo}>
-              <p className={styles.authorName}>{review.author}</p>
-              <Rating rating={review.rating} reviewCount={1} />{" "}
-              {/* Assuming 1 review per entry */}
+              <p className={styles.authorName}>{review.reviewer_name}</p>
+              {/*Display individual rating for each review*/}
+              <Rating rating={review.reviewer_rating} reviewCount={1} />
             </div>
           </div>
-          <p className={styles.reviewText}>{review.text}</p>
+          <p className={styles.reviewText}>{review.comment}</p>
         </div>
       ))}
     </div>

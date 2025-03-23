@@ -1,43 +1,48 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
-import * as api from "../api/api"; // Import API functions
+import * as api from "../api/api";
 
 const initialState = {
   campers: [],
+  total: 0,
   favorites: JSON.parse(localStorage.getItem("favorites")) || [],
   filters: {
     location: "",
-    vehicleType: "",
-    vehicleEquipment: [],
-    page: 1, // Add page to filters for unified approach
-    limit: 4, // Add limit to filters
+    form: "", // Vehicle form type
+    AC: false, // Vehicle form type
+    bathroom: false, // Vehicle form type
+    kitchen: false, // Vehicle form type
+    TV: false, // Vehicle form type
+    radio: false, // Vehicle form type
+    refrigerator: false, // Vehicle form type
+    microwave: false, // Vehicle form type
+    gas: false, // Vehicle form type
+    water: false, // Vehicle form type
   },
   loading: false,
   error: null,
-  hasMore: true,
+  hasMore: false,
 };
 
-// Async Thunk for fetching campers
 export const fetchCampers = createAsyncThunk(
   "campers/fetchCampers",
   async (_, { getState }) => {
-    // No direct filter argument
     const { filters } = getState().campers;
     try {
-      const response = await api.fetchCampers(filters);
-      return response;
+      const items = await api.fetchCampers(filters);
+      // Return in the structure where item has items
+      return { items: items, total: items.total };
     } catch (error) {
       throw error;
     }
   }
 );
 
-// Async Thunk for fetching a single camper by ID
 export const fetchCamperById = createAsyncThunk(
   "campers/fetchCamperById",
   async (id) => {
     try {
-      const response = await api.fetchCamperById(id);
-      return response;
+      const camper = await api.fetchCamperById(id);
+      return camper;
     } catch (error) {
       throw error;
     }
@@ -49,9 +54,8 @@ const campersSlice = createSlice({
   initialState,
   reducers: {
     setFilters: (state, action) => {
-      // Reset page to 1 when filters change, also preserve the limit
-      state.filters = { ...state.filters, ...action.payload, page: 1 };
-      state.hasMore = true;
+      state.filters = { ...state.filters, ...action.payload };
+      state.hasMore = false;
     },
     toggleFavorite: (state, action) => {
       const camperId = action.payload;
@@ -67,14 +71,9 @@ const campersSlice = createSlice({
     },
     clearCampers: (state) => {
       state.campers = [];
-      state.hasMore = true;
+      state.hasMore = false;
     },
-    incrementPage: (state) => {
-      state.filters.page += 1; // Increment page within filters
-    },
-    setCampers: (state, action) => {
-      state.campers = action.payload;
-    },
+    // remove all increment page function, cause there is no sense now
   },
   extraReducers: (builder) => {
     builder
@@ -84,12 +83,10 @@ const campersSlice = createSlice({
       })
       .addCase(fetchCampers.fulfilled, (state, action) => {
         state.loading = false;
-        // Conditionally update the campers array
-        state.campers =
-          state.filters.page === 1
-            ? action.payload
-            : [...state.campers, ...action.payload];
-        state.hasMore = action.payload.length === state.filters.limit;
+        // Update campers and total
+        state.campers = action.payload.items;
+        state.total = action.payload.total;
+        state.hasMore = false;
       })
       .addCase(fetchCampers.rejected, (state, action) => {
         state.loading = false;
@@ -102,7 +99,7 @@ const campersSlice = createSlice({
       })
       .addCase(fetchCamperById.fulfilled, (state, action) => {
         state.loading = false;
-        state.camper = action.payload; // Store single camper data
+        state.camper = action.payload;
       })
       .addCase(fetchCamperById.rejected, (state, action) => {
         state.loading = false;
@@ -111,11 +108,6 @@ const campersSlice = createSlice({
   },
 });
 
-export const {
-  setFilters,
-  toggleFavorite,
-  clearCampers,
-  incrementPage,
-  setCampers,
-} = campersSlice.actions;
+export const { setFilters, toggleFavorite, clearCampers } =
+  campersSlice.actions;
 export default campersSlice.reducer;

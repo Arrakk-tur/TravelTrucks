@@ -1,11 +1,6 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import {
-  fetchCampers,
-  clearCampers,
-  incrementPage,
-  setFilters,
-} from "../redux/campersSlice";
+import { fetchCampers, clearCampers, setFilters } from "../redux/campersSlice";
 import Catalog from "../components/Catalog/Catalog";
 
 const CatalogPage = () => {
@@ -15,19 +10,12 @@ const CatalogPage = () => {
   );
 
   useEffect(() => {
-    dispatch(clearCampers()); // Clear previous results
-    dispatch(fetchCampers()); // Fetch initial set of campers (no direct filter argument)
-  }, [dispatch, filters]); // Depend on filters to re-fetch
-
-  const handleLoadMore = () => {
-    if (hasMore) {
-      dispatch(incrementPage());
-      dispatch(fetchCampers());
-    }
-  };
+    dispatch(clearCampers());
+    dispatch(fetchCampers());
+  }, [dispatch, filters]);
 
   const handleFilterChange = (newFilters) => {
-    dispatch(setFilters(newFilters)); // Dispatch new filters
+    dispatch(setFilters(newFilters));
   };
 
   return (
@@ -36,8 +24,7 @@ const CatalogPage = () => {
       loading={loading}
       error={error}
       hasMore={hasMore}
-      onLoadMore={handleLoadMore}
-      onFilterChange={handleFilterChange} // Pass down the filter change handler
+      onFilterChange={handleFilterChange}
     />
   );
 };
