@@ -1,0 +1,51 @@
+.container {
+  max-width: 1440px;
+  margin: 0 auto;
+  padding: 20px;
+  font-family: var(--base-font-family);
+}
+
+.imageGallery {
+  display: flex;
+  gap: 16px;
+  margin-bottom: 20px;
+}
+
+.mainImage {
+  max-width: 600px;
+  height: auto;
+}
+
+.additionalInfo {
+  margin-top: 20px;
+  border-top: 1px solid var(--gray-light);
+  padding-top: 10px;
+}
+
+.additionalInfo ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  gap: 10px;
+}
+
+.button {
+  background-color: var(--button);
+  color: var(--white);
+  border: none;
+  padding: 10px 20px;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 1em;
+  transition: background-color 0.2s;
+}
+
+.button:hover {
+  background-color: var(--button-hover);
+}
+
+.buttonToDetails {
+  display: flex;
+  gap: 10px;
+}

@@ -1,14 +1,31 @@
 .catalog {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
+  background-color: var(--white);
+  font-family: var(--base-font-family);
+  overflow: hidden;
+}
+
+.container {
+  max-width: 1440px;
+  margin: 0 auto;
   padding: 20px;
-  font-family: sans-serif;
+  display: flex; /* Use flexbox for the main layout */
+}
+
+.sidebar {
+  width: 360px; /* As in the design */
+  padding: 20px;
+}
+
+.mainContent {
+  flex-grow: 1; /* Take remaining space */
+  padding: 20px;
 }
 
 .camperList {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-  gap: 20px;
-  margin-bottom: 20px;
+  grid-template-columns: repeat(
+    auto-fill,
+    minmax(400px, 1fr)
+  ); /* Adjust as needed */
+  gap: 32px;
 }

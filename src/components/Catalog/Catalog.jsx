@@ -1,35 +1,32 @@
 import React from "react";
 import styles from "./Catalog.module.css";
-import CamperCard from "./CamperCard/CamperCard";
+import CamperCard from "../CamperCard/CamperCard";
 import Filters from "../Filters/Filters";
-import Loader from "../Loader/Loader";
-import Button from "../Button/Button";
+import Header from "../Header/Header";
 
-const Catalog = ({
-  campers,
-  loading,
-  error,
-  hasMore,
-  onLoadMore,
-  onFilterChange,
-}) => {
+const Catalog = ({ campers, onFilterChange }) => {
   return (
     <div className={styles.catalog}>
-      <Filters onFilterChange={onFilterChange} />
-
-      <div className={styles.camperList}>
-        {loading && <Loader />}
-        {error && <p>Error: {error}</p>}
-        {Array.isArray(campers) && campers.length > 0 ? (
-          campers.map((camper) => (
-            <CamperCard key={camper.id} camper={camper} />
-          ))
-        ) : (
-          <p>No campers found.</p>
-        )}
+      <Header />
+      <div className={styles.container}>
+        <aside className={styles.sidebar}>
+          <Filters onFilterChange={onFilterChange} />
+        </aside>
+        <main className={styles.mainContent}>
+          <div className={styles.camperList}>
+            {campers &&
+            Array.isArray(campers.items) &&
+            campers.items.length > 0 ? (
+              campers.items.map((camper) => (
+                <CamperCard key={camper.id} camper={camper} />
+              ))
+            ) : (
+              <p>No campers found.</p>
+            )}
+          </div>
+          {/* Add "Load More" button if you decide to use it later */}
+        </main>
       </div>
-
-      {hasMore && <Button text="Load More" onClick={onLoadMore} />}
     </div>
   );
 };

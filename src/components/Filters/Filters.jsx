@@ -1,67 +1,39 @@
 import React from "react";
-import { useSelector } from "react-redux";
 import styles from "./Filters.module.css";
-import Input from "../Input/Input";
 
-const Filters = ({ onFilterChange }) => {
-  const filters = useSelector((state) => state.campers.filters);
-
-  const handleLocationChange = (e) => {
-    onFilterChange({ location: e.target.value });
-  };
-
-  const handleFormChange = (e) => {
-    onFilterChange({ form: e.target.value });
-  };
-
-  const handleEquipmentChange = (e) => {
-    const equipment = e.target.name;
-    const checked = e.target.checked;
-    onFilterChange({ [equipment]: checked });
-  };
-
+const Filters = ({
+  locationValue,
+  form,
+  onInputChange,
+  onSubmit,
+  searchParams,
+}) => {
   return (
-    <div className={styles.filters}>
-      <Input
+    <form onSubmit={onSubmit} className={styles.form}>
+      <label htmlFor="location">Location:</label>
+      <input
         type="text"
-        placeholder="Location"
-        value={filters.location}
-        onChange={handleLocationChange}
+        id="location"
+        name="location"
+        value={locationValue}
+        onChange={onInputChange}
+        className={styles.input}
+        placeholder="Enter location"
       />
 
-      <div>
-        <h3>Vehicle Form</h3>
-        <label>
-          <input
-            type="radio"
-            name="form"
-            value="alcove"
-            checked={filters.form === "alcove"}
-            onChange={handleFormChange}
-          />
-          Alcove
-        </label>
-        <label>
-          <input
-            type="radio"
-            name="form"
-            value="fullyIntegrated"
-            checked={filters.form === "fullyIntegrated"}
-            onChange={handleFormChange}
-          />
-          Fully Integrated
-        </label>
-        <label>
-          <input
-            type="radio"
-            name="form"
-            value="panelTruck"
-            checked={filters.form === "panelTruck"}
-            onChange={handleFormChange}
-          />
-          Van
-        </label>
-      </div>
+      <label htmlFor="form">Form:</label>
+      <select
+        id="form"
+        name="form"
+        value={form}
+        onChange={onInputChange}
+        className={styles.select}
+      >
+        <option value="">All</option>
+        <option value="alcove">Alcove</option>
+        <option value="fullyIntegrated">Fully Integrated</option>
+        <option value="panelTruck">Panel Truck</option>
+      </select>
 
       <div>
         <h3>Vehicle Equipment</h3>
@@ -69,8 +41,8 @@ const Filters = ({ onFilterChange }) => {
           <input
             type="checkbox"
             name="AC"
-            checked={filters.AC}
-            onChange={handleEquipmentChange}
+            checked={searchParams.has("AC")}
+            onChange={onInputChange}
           />
           AC
         </label>
@@ -78,8 +50,8 @@ const Filters = ({ onFilterChange }) => {
           <input
             type="checkbox"
             name="bathroom"
-            checked={filters.bathroom}
-            onChange={handleEquipmentChange}
+            checked={searchParams.has("bathroom")}
+            onChange={onInputChange}
           />
           Bathroom
         </label>
@@ -87,8 +59,8 @@ const Filters = ({ onFilterChange }) => {
           <input
             type="checkbox"
             name="kitchen"
-            checked={filters.kitchen}
-            onChange={handleEquipmentChange}
+            checked={searchParams.has("kitchen")}
+            onChange={onInputChange}
           />
           Kitchen
         </label>
@@ -96,8 +68,8 @@ const Filters = ({ onFilterChange }) => {
           <input
             type="checkbox"
             name="TV"
-            checked={filters.TV}
-            onChange={handleEquipmentChange}
+            checked={searchParams.has("TV")}
+            onChange={onInputChange}
           />
           TV
         </label>
@@ -105,8 +77,8 @@ const Filters = ({ onFilterChange }) => {
           <input
             type="checkbox"
             name="radio"
-            checked={filters.radio}
-            onChange={handleEquipmentChange}
+            checked={searchParams.has("radio")}
+            onChange={onInputChange}
           />
           Radio
         </label>
@@ -114,8 +86,8 @@ const Filters = ({ onFilterChange }) => {
           <input
             type="checkbox"
             name="refrigerator"
-            checked={filters.refrigerator}
-            onChange={handleEquipmentChange}
+            checked={searchParams.has("refrigerator")}
+            onChange={onInputChange}
           />
           Refrigerator
         </label>
@@ -123,8 +95,8 @@ const Filters = ({ onFilterChange }) => {
           <input
             type="checkbox"
             name="microwave"
-            checked={filters.microwave}
-            onChange={handleEquipmentChange}
+            checked={searchParams.has("microwave")}
+            onChange={onInputChange}
           />
           Microwave
         </label>
@@ -132,8 +104,8 @@ const Filters = ({ onFilterChange }) => {
           <input
             type="checkbox"
             name="gas"
-            checked={filters.gas}
-            onChange={handleEquipmentChange}
+            checked={searchParams.has("gas")}
+            onChange={onInputChange}
           />
           Gas
         </label>
@@ -141,13 +113,17 @@ const Filters = ({ onFilterChange }) => {
           <input
             type="checkbox"
             name="water"
-            checked={filters.water}
-            onChange={handleEquipmentChange}
+            checked={searchParams.has("water")}
+            onChange={onInputChange}
           />
           Water
         </label>
       </div>
-    </div>
+
+      <button type="submit" className={styles.button}>
+        Apply Filters
+      </button>
+    </form>
   );
 };
 

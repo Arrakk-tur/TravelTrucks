@@ -1,0 +1,32 @@
+:root {
+  container: 1200px;
+  color: #333;
+}
+
+.container {
+  max-width: var(--container);
+  margin: 0 auto;
+  padding: 0 15px;
+}
+
+.form {
+  display: flex;
+  gap: 15px;
+}
+
+.input {
+  border: 1px solid var(--text);
+  padding: 5px 10px;
+}
+
+.list {
+  list-style: none;
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.listItem {
+  border: 1px solid black;
+  padding: 5px;
+}

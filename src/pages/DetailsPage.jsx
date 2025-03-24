@@ -1,47 +1,112 @@
-import React, { useEffect, useState } from "react";
-import { useParams, useNavigate } from "react-router-dom";
-import { useDispatch, useSelector } from "react-redux";
-import { fetchCamperById } from "../redux/campersSlice";
-import Details from "../components/Details/Details";
-import NotFoundPage from "../components/NotFoundPage/NotFoundPage";
-import * as api from "../api/api"; // Import API functions
+import React, { useState, useEffect, Suspense, lazy, useRef } from "react";
+import {
+  useParams,
+  Link,
+  useLocation,
+  useNavigate,
+  Route,
+  Routes,
+} from "react-router-dom";
+import * as api from "../api/api";
+import styles from "./DetailsPage.module.css";
+import Header from "../components/Header/Header";
 
-const DetailsPage = () => {
+const Features = lazy(() => import("../components/Features/Features"));
+const Reviews = lazy(() => import("../components/Reviews/Reviews"));
+
+function DetailsPage() {
   const { id } = useParams();
-  const dispatch = useDispatch();
+  const [camper, setCamper] = useState(null);
+  const location = useLocation();
   const navigate = useNavigate();
-  const { camper, loading, error } = useSelector((state) => state.campers);
-  const [notFound, setNotFound] = useState(false);
+  const [loading, setLoading] = useState(true);
+
+  const locationRef = useRef(location.state?.from || "/catalog");
 
   useEffect(() => {
-    dispatch(fetchCamperById(id))
-      .unwrap() // Unwrap the promise to catch rejections
-      .catch((error) => {
+    const getCamperDetails = async () => {
+      setLoading(true);
+      try {
+        const camperDetails = await api.fetchCamperById(id);
+        setCamper(camperDetails);
+      } catch (error) {
         if (error.message === "Camper not found") {
-          setNotFound(true);
+          navigate("/404");
         } else {
-          console.error("Error fetching camper:", error);
+          console.error("Error fetching camper details:", error);
         }
-      });
-  }, [dispatch, id]);
+      } finally {
+        setLoading(false);
+      }
+    };
 
-  if (notFound) {
-    return <NotFoundPage />;
-  }
+    getCamperDetails();
+  }, [id, navigate]);
+
+  const handleGoBack = () => {
+    navigate(locationRef.current);
+  };
 
   if (loading) {
     return <div>Loading...</div>;
   }
 
-  if (error) {
-    return <div>Error: {error}</div>;
-  }
-
   if (!camper) {
-    return <div>Camper not found</div>;
+    return null;
   }
 
-  return <Details camper={camper} />;
-};
+  return (
+    <div>
+      <Header />
+      <div className={styles.container}>
+        <section className={styles.imageGallery}>
+          {/* TODO: make loop  */}
+          {camper.gallery.map((image) => {
+            return (
+              <img
+                src={image.thumb}
+                alt={camper.name}
+                className={styles.mainImage}
+              />
+            );
+          })}
+        </section>
+
+        <h2>{camper.name}</h2>
+        <span>Rating: {camper.rating}</span>
+
+        <section className={styles.buttonToDetails}>
+          {/* Details */}
+          <div className={styles.additionalInfo}>
+            {/* <h3>Additional information</h3> */}
+            <ul>
+              <li>
+                <Link to={`/catalog/${id}/features`}>Features</Link>
+              </li>
+              <li>
+                <Link to={`/catalog/${id}/reviews`}>Reviews</Link>
+              </li>
+            </ul>
+          </div>
+          {/* Button */}
+
+          <button onClick={handleGoBack} className={styles.button}>
+            Go back
+          </button>
+        </section>
+
+        <Suspense fallback={<div>Loading features/reviews...</div>}>
+          <Routes>
+            <Route path="features" element={<Features camper={camper} />} />
+            <Route
+              path="reviews"
+              element={<Reviews reviews={camper.reviews} />}
+            />
+          </Routes>
+        </Suspense>
+      </div>
+    </div>
+  );
+}
 
 export default DetailsPage;

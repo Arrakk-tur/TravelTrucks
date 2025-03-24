@@ -7,6 +7,7 @@ import FavoriteButton from "../../FavoriteButton/FavoriteButton";
 import Button from "../../Button/Button";
 
 const CamperCard = ({ camper }) => {
+  console.log("camper: ", camper);
   const dispatch = useDispatch();
   const favorites = useSelector((state) => state.campers.favorites);
   const isFavorite = favorites.includes(camper.id);
@@ -16,7 +17,7 @@ const CamperCard = ({ camper }) => {
   };
 
   const handleShowMoreClick = () => {
-    window.open(`/catalog/${camper.id}`, "_blank");
+    window.open(`/catalog/${camper.id}`);
   };
 
   return (
