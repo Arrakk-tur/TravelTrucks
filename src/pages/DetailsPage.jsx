@@ -87,11 +87,6 @@ function DetailsPage() {
               </li>
             </ul>
           </div>
-          {/* Button */}
-
-          <button onClick={handleGoBack} className={styles.button}>
-            Go back
-          </button>
         </section>
 
         <Suspense fallback={Loader}>

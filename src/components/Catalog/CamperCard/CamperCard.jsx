@@ -1,8 +1,15 @@
 import React from "react";
+import { useNavigate } from "react-router-dom";
+
 import styles from "./CamperCard.module.css";
 import Button from "../../Button/Button";
 
 const CamperCard = ({ camper }) => {
+  const navigate = useNavigate();
+
+  const handleShowMoreClick = () => {
+    navigate(`/catalog/${camper.id}`);
+  };
   return (
     <div className={styles["card-1"]}>
       <div className={styles.content}>
@@ -100,7 +107,7 @@ const CamperCard = ({ camper }) => {
               </div>
             </div>
           </div>
-          <Button text="Show more" className={styles["button-instance"]} />
+          <Button text="Show more" onClick={handleShowMoreClick} />
         </div>
       </div>
     </div>
