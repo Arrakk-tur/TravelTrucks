@@ -8,8 +8,8 @@ import {
   Routes,
 } from "react-router-dom";
 import * as api from "../api/api";
+import Loader from "../components/Loader/Loader";
 import styles from "./DetailsPage.module.css";
-import Header from "../components/Header/Header";
 
 const Features = lazy(() => import("../components/Features/Features"));
 const Reviews = lazy(() => import("../components/Reviews/Reviews"));
@@ -48,7 +48,7 @@ function DetailsPage() {
   };
 
   if (loading) {
-    return <div>Loading...</div>;
+    return Loader;
   }
 
   if (!camper) {
@@ -57,7 +57,7 @@ function DetailsPage() {
 
   return (
     <div>
-      <Header />
+      <h2>{camper.name}</h2>
       <div className={styles.container}>
         <section className={styles.imageGallery}>
           {/* TODO: make loop  */}
@@ -72,7 +72,6 @@ function DetailsPage() {
           })}
         </section>
 
-        <h2>{camper.name}</h2>
         <span>Rating: {camper.rating}</span>
 
         <section className={styles.buttonToDetails}>
@@ -81,10 +80,10 @@ function DetailsPage() {
             {/* <h3>Additional information</h3> */}
             <ul>
               <li>
-                <Link to={`/catalog/${id}`}>Features</Link>
+                <Link to={`/catalog/${id}/features`}>Features</Link>
               </li>
               <li>
-                <Link to={`/catalog/${id}`}>Reviews</Link>
+                <Link to={`/catalog/${id}/reviews`}>Reviews</Link>
               </li>
             </ul>
           </div>
@@ -95,10 +94,13 @@ function DetailsPage() {
           </button>
         </section>
 
-        <Suspense fallback={<div>Loading features/reviews...</div>}>
+        <Suspense fallback={Loader}>
           <Routes>
-            <Route path="" element={<Features camper={camper} />} />
-            <Route path="" element={<Reviews reviews={camper.reviews} />} />
+            <Route path="features" element={<Features camper={camper} />} />
+            <Route
+              path="reviews"
+              element={<Reviews reviews={camper.reviews} />}
+            />
           </Routes>
         </Suspense>
       </div>
