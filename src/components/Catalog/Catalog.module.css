@@ -1,31 +1,33 @@
 .catalog {
-  background-color: var(--white);
-  font-family: var(--base-font-family);
+  background: var(--white);
+  height: 1836px;
+  position: relative;
   overflow: hidden;
 }
 
 .container {
-  max-width: 1440px;
-  margin: 0 auto;
-  padding: 20px;
-  display: flex; /* Use flexbox for the main layout */
+  display: flex;
+  position: absolute;
+  top: 72px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 1440px;
+  padding: 24px 64px;
 }
 
 .sidebar {
-  width: 360px; /* As in the design */
-  padding: 20px;
+  width: 360px;
+  position: relative;
 }
 
 .mainContent {
-  flex-grow: 1; /* Take remaining space */
-  padding: 20px;
+  flex: 1;
+  position: relative;
+  left: 64px;
 }
 
 .camperList {
-  display: grid;
-  grid-template-columns: repeat(
-    auto-fill,
-    minmax(400px, 1fr)
-  ); /* Adjust as needed */
+  display: flex;
+  flex-direction: column;
   gap: 32px;
 }

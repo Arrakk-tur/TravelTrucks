@@ -81,10 +81,10 @@ function DetailsPage() {
             {/* <h3>Additional information</h3> */}
             <ul>
               <li>
-                <Link to={`/catalog/${id}/features`}>Features</Link>
+                <Link to={`/catalog/${id}`}>Features</Link>
               </li>
               <li>
-                <Link to={`/catalog/${id}/reviews`}>Reviews</Link>
+                <Link to={`/catalog/${id}`}>Reviews</Link>
               </li>
             </ul>
           </div>
@@ -97,11 +97,8 @@ function DetailsPage() {
 
         <Suspense fallback={<div>Loading features/reviews...</div>}>
           <Routes>
-            <Route path="features" element={<Features camper={camper} />} />
-            <Route
-              path="reviews"
-              element={<Reviews reviews={camper.reviews} />}
-            />
+            <Route path="" element={<Features camper={camper} />} />
+            <Route path="" element={<Reviews reviews={camper.reviews} />} />
           </Routes>
         </Suspense>
       </div>

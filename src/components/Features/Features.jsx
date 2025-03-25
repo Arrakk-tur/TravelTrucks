@@ -5,7 +5,14 @@ function Features({ camper }) {
     <div>
       <h3>Features</h3>
       <ul>
-        {camper.AC && <li>AC</li>}
+        {camper.AC && (
+          <li>
+            <svg width="15px" height="15px">
+              <use href="../../assets/icons.svg#icon-wind"></use>
+            </svg>
+            <p>AC</p>
+          </li>
+        )}
         {camper.bathroom && <li>Bathroom</li>}
         {camper.kitchen && <li>Kitchen</li>}
         {camper.TV && <li>TV</li>}

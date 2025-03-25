@@ -1,71 +1,275 @@
-.card {
-  border: 1px solid var(--gray-light);
-  padding: 10px;
-  margin-bottom: 10px;
-  border-radius: 5px;
+.card-1,
+.card-1 * {
+  box-sizing: border-box;
 }
 
-.image {
+.card-1 {
+  background: var(--white, #ffffff);
+  border-radius: 20px;
+  border-style: solid;
+  border-color: var(--gray-light, #dadde1);
+  border-width: 1px;
+  padding: 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  align-items: flex-start;
+  justify-content: flex-start;
+  flex-shrink: 0;
+  position: relative;
+}
+
+.content {
+  display: flex;
+  flex-direction: row;
+  gap: 24px;
+  align-items: flex-start;
+  justify-content: flex-start;
+  flex-shrink: 0;
   width: 100%;
-  height: 200px;
+  position: relative;
+}
+
+.pic {
+  border-radius: 10px;
+  flex-shrink: 0;
+  width: 292px;
+  height: 320px;
+  position: relative;
+  overflow: hidden;
   object-fit: cover;
-  border-radius: 5px;
-  margin-bottom: 10px;
 }
 
-.details {
-  padding: 10px;
+.info {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  align-items: flex-start;
+  justify-content: flex-start;
+  flex-shrink: 0;
+  width: calc(100% - 292px - 24px); /* Adjust width */
+  position: relative;
 }
 
-.name {
-  font-size: 1.2em;
-  margin-bottom: 5px;
+.text-container {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  align-items: flex-start;
+  justify-content: flex-start;
+  flex-shrink: 0;
+  width: 100%;
+  position: relative;
+}
+
+.title {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between; /* Distribute items */
+  align-self: stretch;
+  flex-shrink: 0;
+  position: relative;
+}
+
+.text {
+  color: var(--main, #101828);
+  text-align: left;
+  font-family: var(--h2-font-family, "Inter-SemiBold", sans-serif);
+  font-size: var(--h2-font-size, 24px);
+  line-height: var(--h2-line-height, 32px);
+  font-weight: var(--h2-font-weight, 600);
+  position: relative;
 }
 
 .price {
-  font-weight: bold;
-  color: var(--button);
-}
-
-.description {
-  font-size: 0.9em;
-  color: var(--text);
-}
-
-.features {
   display: flex;
-  gap: 5px;
-  margin-top: 10px;
-  flex-wrap: wrap;
-}
-
-.feature {
-  background-color: var(--badges);
-  padding: 5px 10px;
-  border-radius: 15px;
-  font-size: 0.8em;
-  color: var(--main);
-  display: flex;
+  flex-direction: row;
+  gap: 12px;
   align-items: center;
-  gap: 4px; /* Spacing between icon and text */
+  justify-content: center;
+  flex-shrink: 0;
+  width: auto; /* Adjust width */
+  position: relative;
+}
+
+.heart-instance {
+  cursor: pointer;
+  fill: var(--button); /* Or var(--main) */
+  width: 20px; /* Adjust as needed */
+  height: 20px; /* Adjust as needed */
+}
+
+.details {
+  display: flex;
+  flex-direction: row;
+  gap: 16px;
+  align-items: center;
+  justify-content: flex-start;
+  flex-shrink: 0;
+  position: relative;
+}
+
+.reviews {
+  display: flex;
+  flex-direction: row;
+  gap: 4px;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  position: relative;
+}
+
+.star-instance {
+  fill: var(--rating); /* Adjust color */
+  width: 16px;
+  height: 16px;
+}
+
+.button {
+  display: flex;
+  flex-direction: row;
+  gap: 12px;
+  align-items: flex-start;
+  justify-content: flex-start;
+  flex-shrink: 0;
+  position: relative;
+}
+
+.text2 {
+  color: var(--main, #101828);
+  text-align: left;
+  font-family: var(--body-font-family, "Inter-Regular", sans-serif);
+  font-size: var(--body-font-size, 16px);
+  line-height: var(--body-line-height, 24px);
+  font-weight: var(--body-font-weight, 400);
+  position: relative;
 }
 
 .location {
   display: flex;
+  flex-direction: row;
+  gap: 4px;
   align-items: center;
-  margin-bottom: 5px;
-  color: var(--gray);
+  justify-content: center;
+  flex-shrink: 0;
+  position: relative;
 }
 
-.icon {
+.map {
+  fill: var(--text);
+  flex-shrink: 0;
   width: 16px;
   height: 16px;
-  fill: var(--main); /* Adjust the fill color as needed */
+  position: relative;
+  overflow: visible;
 }
 
-.priceAndFavorite {
+.supporting-text {
+  color: var(--text, #475467);
+  text-align: left;
+  font-family: var(--body-font-family, "Inter-Regular", sans-serif);
+  font-size: var(--body-font-size, 16px);
+  line-height: var(--body-line-height, 24px);
+  font-weight: var(--body-font-weight, 400);
+  position: relative;
+  width: 100%;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  white-space: nowrap;
+}
+
+.badges-container {
   display: flex;
-  justify-content: space-between;
+  flex-direction: column;
+  gap: 8px;
+  align-items: flex-start;
+  justify-content: flex-start;
+  align-self: stretch;
+  flex-shrink: 0;
+  position: relative;
+}
+
+._1-raw {
+  display: flex;
+  flex-direction: row;
+  gap: 8px;
+  align-items: flex-start;
+  justify-content: flex-start;
+  align-self: stretch;
+  flex-shrink: 0;
+  position: relative;
+}
+
+._1 {
+  background: var(--badges, #f2f4f7);
+  border-radius: 100px;
+  padding: 12px 18px;
+  display: flex;
+  flex-direction: row;
+  gap: 8px;
   align-items: center;
-  margin-bottom: 5px;
+  justify-content: flex-start;
+  flex-shrink: 0;
+  position: relative;
+  mix-blend-mode: multiply;
+}
+
+.text3 {
+  color: var(--main, #101828);
+  text-align: center;
+  font-family: var(--body-2-font-family, "Inter-Medium", sans-serif);
+  font-size: var(--body-2-font-size, 16px);
+  line-height: var(--body-2-line-height, 24px);
+  font-weight: var(--body-2-font-weight, 500);
+  position: relative;
+}
+
+._2 {
+  background: var(--badges, #f2f4f7);
+  border-radius: 100px;
+  padding: 12px 18px;
+  display: flex;
+  flex-direction: row;
+  gap: 8px;
+  align-items: center;
+  justify-content: flex-start;
+  flex-shrink: 0;
+  position: relative;
+  mix-blend-mode: multiply;
+}
+
+._3 {
+  background: var(--badges, #f2f4f7);
+  border-radius: 100px;
+  padding: 12px 18px;
+  display: flex;
+  flex-direction: row;
+  gap: 8px;
+  align-items: center;
+  justify-content: flex-start;
+  flex-shrink: 0;
+  position: relative;
+  mix-blend-mode: multiply;
+}
+
+._2-raw {
+  display: flex;
+  flex-direction: row;
+  gap: 8px;
+  align-items: flex-start;
+  justify-content: flex-start;
+  align-self: stretch;
+  flex-shrink: 0;
+  position: relative;
+}
+
+.button-instance {
+  flex-shrink: 0;
+  background-color: var(--button);
+  color: var(--white);
+  padding: 10px 20px;
+  border-radius: 5px;
+  border: none;
+  cursor: pointer;
 }
